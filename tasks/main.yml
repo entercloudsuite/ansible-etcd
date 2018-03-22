@@ -1,0 +1,35 @@
+---
+
+- name: Install ca-certificates
+  apt:
+    name: ca-certificates
+    state: present
+
+- name: Check for etcd binary
+  stat:
+    path: /usr/local/bin/etcd
+  register: etcd_check
+
+- name: "Download and unpack etcd v{{ etcd_version }}"
+  unarchive:
+    src: "https://github.com/coreos/etcd/releases/download/v{{ etcd_version }}/etcd-v{{ etcd_version }}-linux-amd64.tar.gz"
+    dest: /tmp
+    remote_src: yes
+  when: not etcd_check.stat.exists
+
+- name: Install etcd binaries
+  copy:
+    src: "/tmp/etcd-v{{ etcd_version }}-linux-amd64/{{ item }}"
+    dest: "/usr/local/bin/{{ item }}"
+    remote_src: yes
+    mode: 0755
+  with_items:
+    - etcd
+    - etcdctl
+  when: not etcd_check.stat.exists
+
+- name: Remove downloaded etcd archive
+  file:
+    path: "/tmp/etcd-v{{ etcd_version }}-linux-amd64.tar.gz"
+    state: absent
+  when: not etcd_check.stat.exists

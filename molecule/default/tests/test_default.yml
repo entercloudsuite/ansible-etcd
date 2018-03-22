@@ -1,0 +1,12 @@
+---
+
+file:
+  /usr/local/bin/etcd:
+    exists: true
+  /usr/local/bin/etcdctl:
+    exists: true
+command:
+  etcd --version:
+    exit-status: 0
+  etcdctl --version:
+    exit-status: 0
