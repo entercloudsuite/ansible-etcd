@@ -11,4 +11,5 @@ galaxy_info:
         - xenial
   galaxy_tags:
     - molecule
-dependencies: []
+dependencies:
+  - entercloudsuite.prometheus-node-exporter
