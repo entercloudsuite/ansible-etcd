@@ -29,14 +29,12 @@
         }
     ],
     "variables": {
-		"image_name": "ecs-etcd {{env `TRAVIS_BRANCH`}}",
+	"image_name": "ecs-etcd {{env `TRAVIS_BRANCH`}}",
         "ecs_flavor":  "e3standard.x2",
-		"ecs_region":  "nl-ams1",
-
+	"ecs_region":  "nl-ams1",
         "ecs_tenant":  "{{env `OS_TENANT`}}",
         "ecs_username":  "{{env `OS_USERNAME`}}",
         "ecs_password":  "{{env `OS_PASSWORD`}}",
-		"ecs_network":  "{{env `OS_NETWORK`}}"
-
+	"ecs_network":  "{{env `OS_NETWORK`}}"
     }
 }
